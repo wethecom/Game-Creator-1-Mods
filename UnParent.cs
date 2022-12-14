@@ -62,7 +62,7 @@ namespace GameCreator.Core
 
         protected override void OnEnableEditorChild()
         {
-            this.spTarget = this.serializedObject.FindProperty("ParentTarget");
+            this.spTarget = this.serializedObject.FindProperty("Target");
             //this.spActionType = this.serializedObject.FindProperty("actionType");
          //   this.spChildTarget = this.serializedObject.FindProperty("ChildTarget");
             // this.spMinRadius = this.serializedObject.FindProperty("AttachMinRadius");
