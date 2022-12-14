@@ -33,7 +33,8 @@ namespace GameCreator.Core
             ChildTarget = this.ChildTarget.GetComponent<Transform>(target);
 
             ChildTarget.transform.parent = ParTarget.transform;
-
+            ChildTarget.transform.localPosition = Vector3.zero;
+            ChildTarget.transform.localEulerAngles = Vector3.zero;
             // charTarget.characterLocomotion.AttachTarget(
             //     Attach,
             //     this.AttachMinRadius,
