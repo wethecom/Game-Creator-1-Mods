@@ -14,35 +14,32 @@ namespace GameCreator.Core
     [AddComponentMenu("")]
 	public class Parent : IAction
 	{
-      
+       // Public fields that can be set in the inspector:
+    public TargetGameObject ParentTarget = new TargetGameObject(); // Game object to parent the child to
+    public TargetGameObject ChildTarget = new TargetGameObject(); // Game object to be parented
 
-        public TargetGameObject ParentTarget = new TargetGameObject();
-        // public ActionType actionType = ActionType.Attach;
+    // Method that is called when the action is executed:
+    public override bool InstantExecute(GameObject target, IAction[] actions, int index)
+    {
+        // Get the transform of the parent game object:
+        Transform ParTarget = null;
+        ParTarget = this.ParentTarget.gameObject.transform;
 
-        public TargetGameObject ChildTarget = new TargetGameObject();
-       // public float AttachMinRadius = 2.0f;
-       // public float AttachMaxRadius = 4.0f;
+        // Get the transform of the child game object:
+        Transform ChildTarget = null;
+        ChildTarget = this.ChildTarget.GetComponent<Transform>(target);
 
-        // EXECUTABLE: ----------------------------------------------------------------------------
+        // Set the transform parent of the child game object to the transform of the parent game object:
+        ChildTarget.transform.parent = ParTarget.transform;
 
-        public override bool InstantExecute(GameObject target, IAction[] actions, int index)
-        {
-            Transform ParTarget = null;
-            ParTarget = this.ParentTarget.gameObject.transform;
-            Transform ChildTarget = null;
-            ChildTarget = this.ChildTarget.GetComponent<Transform>(target);
+        // Set the local position and rotation of the child game object to zero:
+        ChildTarget.transform.localPosition = Vector3.zero;
+        ChildTarget.transform.localEulerAngles = Vector3.zero;
 
-            ChildTarget.transform.parent = ParTarget.transform;
-            ChildTarget.transform.localPosition = Vector3.zero;
-            ChildTarget.transform.localEulerAngles = Vector3.zero;
-            // charTarget.characterLocomotion.AttachTarget(
-            //     Attach,
-            //     this.AttachMinRadius,
-            //    this.AttachMaxRadius
-            // );
+        // Return true to indicate that the action was successful:
+        return true;
+    }
 
-            return true;
-        }
 
 
         // +--------------------------------------------------------------------------------------+
